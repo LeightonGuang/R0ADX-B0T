@@ -1,2 +1,2 @@
 # R0ADX-B0T
-discord bot
+my diy discord bot
