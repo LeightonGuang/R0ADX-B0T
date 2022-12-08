@@ -22,10 +22,10 @@ client.on("ready", () => {
 });
 
 client.on("messageCreate", (message) => {
-  //if message don't start with prefix or not a bot
   if(!message.author.bot){
-   console.log(message.content);
+  console.log(`Server: ${message.guild.name} \t User: ${message.author.tag} \t Message: ${message.content}`);
   }
+  //if message don't start with prefix and not a bot
   if (!message.content.startsWith(prefix) && !message.author.bot) {
     if(message.content === "rock"){
       message.reply("Paper, you lost");
@@ -37,14 +37,6 @@ client.on("messageCreate", (message) => {
 
     if(message.content === "scissors"){
       message.reply("Rock, you lost");
-    }
-    
-    if(message.content === "pak u"){
-      message.reply("pak u too");
-    }
-
-    if(message.content === "<:PogOFF:1049258618995867668>"){
-      message.reply("<:PogOFF:1049258618995867668>");
     }
 
     let kayla = /kayla/i;
@@ -62,8 +54,8 @@ client.on("messageCreate", (message) => {
   
   
     if (command === "status") {
-      message.channel.send("bot is online");
-      console.log("bot is online");
+      message.reply("online");
+      console.log("online");
     }
     
     if(command === "kayla"){
@@ -77,7 +69,26 @@ client.on("messageCreate", (message) => {
     }
 
     if(command === "roll"){
-      message.channel.send(getRandomInt(6));
+      message.reply((getRandomInt(6) + 1).toString());
+    }
+
+    if(command ==="help"){
+      const helpEmbed = new EmbedBuilder()
+      .setAuthor({ name: "R0ADX B0T"})
+      .setTitle("HELP")
+      .setDescription("list of commands available for R0ADX B0T\n vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
+      .addFields(
+      { name: "/status", value: "Bot online status"},
+      { name: "/kayla", value: "Kayla is pepega"},
+      { name: "/leighton", value: "Founder of R0ADX B0T"},
+      { name: "There are also keywords that will trigger R0ADX B0T to reply", value: "-", inline: true},
+      { name: "kayla", value: "Reply with pepega" },
+      { name: "rock / paper / scissors", value: "You will always loose"},
+
+      )
+      .setTimestamp()
+      .setFooter({ text: "R0ADX B0T" })
+      message.reply({ embeds: [helpEmbed] });
     }
   }
 });
