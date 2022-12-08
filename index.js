@@ -1,6 +1,9 @@
 const { Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionBitField, Permissions } = require(`discord.js`);
 console.log("loading Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionBitField, Permissions");
 
+require("dotenv").config();
+const TOKEN = process.env.TOKEN;
+
 const prefix = "/";
 console.log("prefix set to '/'");
 
@@ -20,6 +23,9 @@ client.on("ready", () => {
 
 client.on("messageCreate", (message) => {
   //if message don't start with prefix or not a bot
+  if(!message.author.bot){
+   console.log(message.content);
+  }
   if (!message.content.startsWith(prefix) && !message.author.bot) {
     if(message.content === "rock"){
       message.reply("Paper, you lost");
@@ -76,4 +82,4 @@ client.on("messageCreate", (message) => {
   }
 });
 
-client.login(process.env.TOKEN);
+client.login(TOKEN);
