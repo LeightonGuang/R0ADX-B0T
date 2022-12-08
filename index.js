@@ -23,7 +23,11 @@ client.on("ready", () => {
 
 client.on("messageCreate", (message) => {
   if(!message.author.bot){
-  console.log(`Server: ${message.guild.name} \t User: ${message.author.tag} \t Message: ${message.content}`);
+    let today = new Date();
+    let date = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date + " " + time;
+    console.log(`${dateTime} \t Server: ${message.guild.name} \t User: ${message.author.tag} \t Message: ${message.content}`);
   }
   //if message don't start with prefix and not a bot
   if (!message.content.startsWith(prefix) && !message.author.bot) {
