@@ -1,9 +1,17 @@
+console.log(`
+  _____   ___          _______   __  ____   ___ _______
+ |  __ \\ / _ \\   /\\   |  __ \\ \\ / / |  _ \\ / _ \\__   __|
+ | |__) | | | | /  \\  | |  | \\ V /  | |_) | | | | | |
+ |  _  /| | | |/ /\\ \\ | |  | |> <   |  _ <| | | | | |
+ | | \\ \\| |_| / ____ \\| |__| / . \\  | |_) | |_| | | |
+ |_|  \\_\\\\___/_/    \\_\\_____/_/ \\_\\ |____/ \\___/  |_|
+`);
+
 const { Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionBitField, Permissions } = require(`discord.js`);
 console.log("LOG: \t loading Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionBitField, Permissions");
 
 const { config } = require("dotenv").config();
 const TOKEN = process.env.TOKEN;
-console.log("TOKEN: " + TOKEN);
 
 const prefix = "/";
 console.log("LOG: \t prefix set to '/'");
@@ -14,10 +22,11 @@ console.log("LOG: \t create new client");
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-
+client.login(TOKEN);
 //console.log("getting ready");
 client.on("ready", () => {
-  console.log("LOG: \t Bot is online!");
+  //message.channel.send(`LOG: ${client.user.tag} is online`);
+  console.log(`LOG: \t ${client.user.tag} is online!`);
 
   client.user.setActivity(`I'm working`, {type: "WATCHING"});
 });
@@ -28,7 +37,7 @@ client.on("messageCreate", (message) => {
     let date = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     let dateTime = date + " " + time;
-    console.log(`${dateTime} \t Server: ${message.guild.name} \t User: ${message.author.tag} \nMessage: ${message.content}`);
+    console.log(`${dateTime} \t Server: ${message.guild.name} \t Channel: ${message.channel.name} \t User: ${message.author.tag} \nMessage: ${message.content}`);
   }
   //if message don't start with prefix and not a bot
   if (!message.content.startsWith(prefix) && !message.author.bot) {
@@ -98,5 +107,3 @@ client.on("messageCreate", (message) => {
     }
   }
 });
-
-client.login(TOKEN);
