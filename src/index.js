@@ -1,8 +1,9 @@
 const { Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionBitField, Permissions } = require(`discord.js`);
 console.log("LOG: \t loading Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionBitField, Permissions");
 
-require("dotenv").config();
+const { config } = require("dotenv").config();
 const TOKEN = process.env.TOKEN;
+console.log("TOKEN: " + TOKEN);
 
 const prefix = "/";
 console.log("LOG: \t prefix set to '/'");
