@@ -1,0 +1,24 @@
+{
+  "name": "r0adx-b0t",
+  "version": "1.0.0",
+  "description": "my diy discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeightonGuang/R0ADX-B0T.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeightonGuang/R0ADX-B0T/issues"
+  },
+  "homepage": "https://github.com/LeightonGuang/R0ADX-B0T#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3"
+  }
+}
