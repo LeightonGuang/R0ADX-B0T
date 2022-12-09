@@ -7,7 +7,10 @@ console.log(`
  |_|  \\_\\\\___/_/    \\_\\_____/_/ \\_\\ |____/ \\___/  |_|
 `);
 
-const { Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionBitField, Permissions } = require(`discord.js`);
+const { REST } = require('@discordjs/rest');
+console.log("LOG: \t loading @discordjs/rest");
+
+const { Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionBitField, Permissions, ActivityType } = require(`discord.js`);
 console.log("LOG: \t loading Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionBitField, Permissions");
 
 const { config } = require("dotenv").config();
@@ -16,20 +19,40 @@ const TOKEN = process.env.TOKEN;
 const prefix = "/";
 console.log("LOG: \t prefix set to '/'");
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent
+  ],
+});
 console.log("LOG: \t create new client");
+
+const rest = new REST({ version: '10' }).setToken(TOKEN);
+
+client.login(TOKEN);
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-client.login(TOKEN);
+
+//=====================================================================
 //console.log("getting ready");
 client.on("ready", () => {
   //message.channel.send(`LOG: ${client.user.tag} is online`);
-  console.log(`LOG: \t ${client.user.tag} is online!`);
+  console.log(`
+=========================================
+  R0ADX B0T is ONLINE as ${client.user.tag}
+=========================================
+  `);
 
-  client.user.setActivity(`I'm working`, {type: "WATCHING"});
+  client.user.setPresence({
+    activities: [{ name: "your cctv", type: ActivityType.Watching }],
+    status: "Hacking",
+  });
 });
+
+//=====================================================================
 
 client.on("messageCreate", (message) => {
   if(!message.author.bot){
