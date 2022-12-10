@@ -70,6 +70,11 @@ client.on("messageCreate", (message) => {
     let dateTime = date + " " + time;
     console.log(`${dateTime} \t Server: ${message.guild.name} \t Channel: ${message.channel.name} \t User: ${message.author.tag} \nMessage: ${message.content}`);
   }
+
+  if (message.content === "/guild-id") {
+    message.reply("Guild id: " + message.guild.id);
+    console.log("Guild id: " + message.guild.id);
+  }
   /*
   if(command ==="help"){
       const helpEmbed = new EmbedBuilder()
