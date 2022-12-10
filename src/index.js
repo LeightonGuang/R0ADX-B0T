@@ -7,17 +7,11 @@ console.log(`
  |_|  \\_\\\\___/_/    \\_\\_____/_/ \\_\\ |____/ \\___/  |_|
 `);
 
+const fs = require('node:fs');
+const path = require('node:path');
 const { REST } = require('@discordjs/rest');
-console.log("LOG: \t loading @discordjs/rest");
-
-const { Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionBitField, Permissions, ActivityType } = require(`discord.js`);
-console.log("LOG: \t loading Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionBitField, Permissions");
-
-const { config } = require("dotenv").config();
-const TOKEN = process.env.TOKEN;
-
-const prefix = "/";
-console.log("LOG: \t prefix set to '/'");
+const { Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionsBitField, Permissions, ActivityType, Routes } = require('discord.js');
+const { config } = require('dotenv');
 
 const client = new Client({
   intents: [
@@ -26,20 +20,38 @@ const client = new Client({
     GatewayIntentBits.MessageContent
   ],
 });
-console.log("LOG: \t create new client");
+console.log("LOG: \t new client created");
+
+config();
+
+const TOKEN = process.env.TOKEN;
+console.log("LOG: \t .env loaded");
+
+//===========================================================
+//dynamically import all commands from commands folder
+client.commands = new Collection();
+
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+  const filePath = path.join(commandsPath, file);
+  const command = require(filePath);
+  // Set a new item in the Collection with the key as the command name and the value as the exported module
+  if ('data' in command && 'execute' in command) {
+    client.commands.set(command.data.name, command);
+    console.log(`LOG: \t setting command.data.name: ${command.data.name} \t client.commands: ${client.commands}`);
+
+  } else {
+    console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+  }
+}
+//===========================================================
 
 const rest = new REST({ version: '10' }).setToken(TOKEN);
 
-client.login(TOKEN);
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-
 //=====================================================================
-//console.log("getting ready");
 client.on("ready", () => {
-  //message.channel.send(`LOG: ${client.user.tag} is online`);
   console.log(`
 =========================================
   R0ADX B0T is ONLINE as ${client.user.tag}
@@ -52,64 +64,19 @@ client.on("ready", () => {
   });
 });
 
+client.login(TOKEN);
 //=====================================================================
 
 client.on("messageCreate", (message) => {
-  if(!message.author.bot){
+  if (!message.author.bot) {
     let today = new Date();
     let date = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     let dateTime = date + " " + time;
     console.log(`${dateTime} \t Server: ${message.guild.name} \t Channel: ${message.channel.name} \t User: ${message.author.tag} \nMessage: ${message.content}`);
   }
-  //if message don't start with prefix and not a bot
-  if (!message.content.startsWith(prefix) && !message.author.bot) {
-    if(message.content === "rock"){
-      message.reply("Paper, you lost");
-      console.log("LOG: \t Paper, you lost");
-    }
-
-    if(message.content === "paper"){
-      message.reply("Scissors, you lost");
-      console.log("LOG: \t Scissors, you lost");
-    }
-
-    if(message.content === "scissors"){
-      message.reply("Rock, you lost");
-      console.log("LOG: \t Rock, you lost");
-    }
-
-    //let kayla = ;
-    if((/kayla/i).test(message.content)){
-      message.reply("https://cdn.discordapp.com/emojis/993072878511722516.webp?size=48");
-      console.log("LOG: \t reply pepega to anything with kayla");
-    }
-    
-  } else if (message.content.startsWith(prefix)) {
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
-  
-    const messageArray = message.content.split(" ");
-    const argument = messageArray.slice(1);
-    const cmd = messageArray[0];
-  
-  
-    if (command === "status") {
-      message.reply("online");
-      console.log("LOG: \t online");
-    }
-    
-    if(command === "leighton"){
-      message.channel.send("founder of R0ADX B0T");
-      console.log("LOG: \t founder of R0ADX B0T");
-    }
-
-    if(command === "roll"){
-      message.reply((getRandomInt(6) + 1).toString());
-      console.log("LOG: \t roll for a random number");
-    }
-
-    if(command ==="help"){
+  /*
+  if(command ==="help"){
       const helpEmbed = new EmbedBuilder()
       .setAuthor({ name: "R0ADX B0T"})
       .setTitle("HELP")
@@ -128,5 +95,24 @@ client.on("messageCreate", (message) => {
       message.reply({ embeds: [helpEmbed] });
       console.log("LOG: \t embed help list");
     }
+  }*/
+});
+
+client.on(Events.InteractionCreate, async interaction => {
+  //if interaction is a command
+  if (!interaction.isChatInputCommand()) return;
+  const command = interaction.client.commands.get(interaction.commandName);
+
+  if (!command) {
+    console.log(`No ${interaction.commandName} found`);
+    return;
+  }
+
+  try {
+    await command.execute(interaction);
+    console.log("interaction: " + interaction.commandName);
+  } catch (error) {
+    console.log(error);
+    await interaction.reply({ content: "Error executing command", ephemeral: true });
   }
 });
