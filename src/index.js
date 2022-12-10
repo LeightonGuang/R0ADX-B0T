@@ -40,17 +40,12 @@ for (const file of commandFiles) {
   // Set a new item in the Collection with the key as the command name and the value as the exported module
   if ('data' in command && 'execute' in command) {
     client.commands.set(command.data.name, command);
-    console.log(`LOG: \t setting command.data.name: ${command.data.name} \t client.commands: ${client.commands}`);
 
   } else {
     console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
   }
 }
 //===========================================================
-
-const rest = new REST({ version: '10' }).setToken(TOKEN);
-
-//=====================================================================
 client.on("ready", () => {
   console.log(`
 =========================================
