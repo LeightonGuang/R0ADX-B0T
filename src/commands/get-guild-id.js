@@ -3,8 +3,8 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("get-guild-id")
-    .setDescription("bot online status"),
+    .setDescription("get gulid id"),
   async execute(interaction) {
-    await interaction.reply("Bot is online");
+    await interaction.reply("guild id: " + interaction.guild.id);
   },
 };
