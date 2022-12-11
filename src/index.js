@@ -9,8 +9,7 @@ console.log(`
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { REST } = require('@discordjs/rest');
-const { Client, Events, Collection, GatewayIntentBits, EmbedBuilder, PermissionsBitField, Permissions, ActivityType, Routes } = require('discord.js');
+const { Client, Events, Collection, GatewayIntentBits, ActivityType } = require('discord.js');
 const { config } = require('dotenv');
 
 const client = new Client({
@@ -75,27 +74,6 @@ client.on("messageCreate", (message) => {
     message.reply("Guild id: " + message.guild.id);
     console.log("Guild id: " + message.guild.id);
   }
-  /*
-  if(command ==="help"){
-      const helpEmbed = new EmbedBuilder()
-      .setAuthor({ name: "R0ADX B0T"})
-      .setTitle("HELP")
-      .setDescription("list of commands available for R0ADX B0T\n vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
-      .addFields(
-      { name: "/status", value: "Bot online status"},
-      { name: "/roll", value: "Roll a random number between 1-6"},
-      { name: "/leighton", value: "Founder of R0ADX B0T"},
-      { name: "There are also keywords that will trigger R0ADX B0T to reply", value: "-", inline: true},
-      { name: "kayla", value: "Reply with pepega" },
-      { name: "rock / paper / scissors", value: "You will always loose"},
-
-      )
-      .setTimestamp()
-      .setFooter({ text: "R0ADX B0T" })
-      message.reply({ embeds: [helpEmbed] });
-      console.log("LOG: \t embed help list");
-    }
-  }*/
 });
 
 client.on(Events.InteractionCreate, async interaction => {
