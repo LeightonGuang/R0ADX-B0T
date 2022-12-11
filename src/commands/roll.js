@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("roll")
-        .setDescription("roll a random number")
+        .setDescription("roll a random number from 1 to a specific number")
         .addStringOption((option) =>
             option
                 .setName("number")
