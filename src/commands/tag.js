@@ -19,6 +19,8 @@ module.exports = {
       //create new role
       interaction.guild.roles.create({ name: "cheese touch" });
       console.log("LOG: \t created new cheese touch role");
+      await interaction.reply({ content: "set cheese touch role to game starter", ephemeral: true });
+      return;
     }
 
     //if the user has cheese touch
@@ -26,8 +28,8 @@ module.exports = {
 
       //if new tag alrady have cheese touch
       if (target.roles.cache.some(role => role.name === "cheese touch")) {
-        await interaction.reply(`${target} already have cheese touch`);
-        console.log(target.user.username + " already have cheese touch");
+        await interaction.reply({ content: `${target} already have cheese touch`, ephemeral: true });
+        console.log(`LOG: \t ${target.user.username} already have cheese touch`);
         return;
 
       } else {
@@ -42,7 +44,8 @@ module.exports = {
 
     } else {
       //user has no cheese touch
-      await interaction.reply(`${interaction.member} You don't have cheese touch`);
+      await interaction.reply({ content: `You don't have cheese touch`, ephemeral: true });
+      console.log("LOG: \t You don't have cheese touch");
       return;
     }
   }
