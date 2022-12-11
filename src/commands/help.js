@@ -12,10 +12,9 @@ module.exports = {
       .addFields(
         { name: "/status", value: "Bot online status" },
         { name: "/roll", value: "Roll a random number from 1 to a spefic number by you" },
-        { name: "/rock-paper-scissors", value: "rock paper scissors game" },
-        { name: "/tag", value: "tag like cheese touch" },
-        { name: "/leighton", value: "Founder of R0ADX B0T" },
-
+        { name: "/rock-paper-scissors", value: "Rock paper scissors game" },
+        { name: "/tag", value: "Tag like cheese touch" },
+        { name: "/creator", value: "Creator of R0ADX B0T" },
       )
       .setTimestamp()
       .setFooter({ text: "R0ADX B0T" })
