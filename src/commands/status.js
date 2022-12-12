@@ -5,6 +5,6 @@ module.exports = {
         .setName("status")
         .setDescription("bot online status"),
     async execute(interaction) {
-        await interaction.reply("Bot is online");
+        await interaction.reply("I'm online!");
     },
 };
