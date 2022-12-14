@@ -53,7 +53,7 @@ client.on("ready", () => {
   `);
 
   client.user.setPresence({
-    activities: [{ name: "your cctv", type: ActivityType.Watching }],
+    activities: [{ name: "you on cctv", type: ActivityType.Watching }],
     status: "Hacking",
   });
 });
