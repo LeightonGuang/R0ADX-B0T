@@ -8,8 +8,10 @@ module.exports = {
       .setDescription('user')),
 
   async execute(interaction) {
+    let sender = interaction.member;
     let target = interaction.options.getMember('user');
-    //await interaction.reply({ content: `pinging ${target} 10 times`, ephemeral: true });
+    await interaction.reply({ content: `pinging ${target} 10 times`, ephemeral: true });
+    interaction.channel.send(`${sender} is spam pinging you`);
     for (let i = 0; i < 10; i++) {
       interaction.channel.send(`${target}!`);
     }
