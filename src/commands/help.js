@@ -13,6 +13,7 @@ module.exports = {
         { name: "/status", value: "Bot online status" },
         { name: "/roll", value: "Roll a random number from 1 to a spefic number by you" },
         { name: "/rock-paper-scissors", value: "Rock paper scissors game" },
+        { name: "/spam-ping", value: "Ping a user 10 times" },
         { name: "/tag", value: "Tag like cheese touch" },
         { name: "/creator", value: "Creator of R0ADX B0T" },
       )
