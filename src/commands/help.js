@@ -15,6 +15,8 @@ module.exports = {
         { name: "/rock-paper-scissors", value: "Rock paper scissors game" },
         { name: "/spam-ping", value: "Ping a user 10 times" },
         { name: "/ghost-ping", value: "Ping a user without the tag showing" },
+        { name: "/schedule-message date", value: "schedule a message by date" },
+        { name: "/schedule-message timer", value: "schedule a message with a timer" },
         { name: "/tag", value: "Tag like cheese touch" },
         { name: "/creator", value: "Creator of R0ADX B0T" },
       )
