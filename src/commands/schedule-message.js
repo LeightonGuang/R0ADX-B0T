@@ -7,11 +7,11 @@ module.exports = {
     .addSubcommand((subcommand) =>
       subcommand
         .setName("timer")
-        .setDescription("Timer for message")
+        .setDescription("timer for message")
         .addUserOption((option) =>
           option
             .setName('to')
-            .setDescription('who to send to')
+            .setDescription('user to send to')
             .setRequired(true),
         )
         .addStringOption((option) =>
@@ -23,72 +23,72 @@ module.exports = {
         .addIntegerOption((option) =>
           option
             .setName("hour")
-            .setDescription("enter the hour(s) for scheduled message")
+            .setDescription("how many hour(s) till message sent")
             .setRequired(false),
         )
         .addIntegerOption((option) =>
           option
             .setName("minute")
-            .setDescription("enter the minute(s) for scheduled message")
+            .setDescription("how many minute(s) till message sent")
             .setRequired(false),
         )
         .addIntegerOption((option) =>
           option
             .setName("second")
-            .setDescription("enter the second(s) for scheduled message")
+            .setDescription("how many second(s) till message sent")
             .setRequired(false),
         )
     )
     .addSubcommand((subcommand) =>
       subcommand
         .setName("date")
-        .setDescription("Date for message")
+        .setDescription("date for message")
         .addUserOption((option) =>
           option
             .setName('to')
-            .setDescription('who to send to')
+            .setDescription('user to send to')
             .setRequired(true),
         )
         .addStringOption((option) =>
           option
             .setName("message")
-            .setDescription("enter a message to be sent for later")
+            .setDescription("enter a message to be sent later")
             .setRequired(true),
         )
         .addIntegerOption((option) =>
           option
             .setName("day")
-            .setDescription("enter the minute(s) for scheduled message")
+            .setDescription("enter the day for scheduled message")
             .setRequired(true),
         )
         .addIntegerOption((option) =>
           option
             .setName("month")
-            .setDescription("enter the minute(s) for scheduled message")
+            .setDescription("enter the month for scheduled message")
             .setRequired(true),
         )
         .addIntegerOption((option) =>
           option
             .setName("year")
-            .setDescription("enter the minute(s) for scheduled message")
+            .setDescription("enter the year for scheduled message")
             .setRequired(true),
         )
         .addIntegerOption((option) =>
           option
             .setName("hour")
-            .setDescription("enter the minute(s) for scheduled message")
+            .setDescription("enter the hour of a 24 hour clock for scheduled message")
             .setRequired(true),
         )
         .addIntegerOption((option) =>
           option
             .setName("minute")
-            .setDescription("enter the minute(s) for scheduled message")
+            .setDescription("enter the minute for scheduled message")
             .setRequired(true),
         )
         .addIntegerOption((option) =>
           option
             .setName("second")
-            .setDescription("enter the minute(s) for scheduled message")
+            .setDescription("enter the second for scheduled message")
             .setRequired(true),
         )
     ),
