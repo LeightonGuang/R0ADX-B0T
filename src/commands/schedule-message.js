@@ -120,21 +120,21 @@ module.exports = {
 
     function convertNum() {
       if (hr == null) {
-        hr = "00";
+        hr = 0;
 
-      } else if (hr.toString().length = 1) {
+      } if (hr.toString().length === 1) {
         hr = "0" + hr.toString();
 
       } if (min == null) {
-        min = "00";
+        min = 0;
 
-      } else if (min.toString().length = 1) {
+      } if (min.toString().length === 1) {
         min = "0" + min.toString();
 
       } if (sec == null) {
-        sec = "00";
+        sec = 0;
 
-      } else if (sec.toString().length = 1) {
+      } if (sec.toString().length === 1) {
         sec = "0" + sec.toString();
       }
     }
@@ -156,9 +156,18 @@ to:\t\t${target.user.tag}`);
 
     } else if (interaction.options.getSubcommand() === "date") {
       scheduleDateMessage();
-      await interaction.reply({ content: `${sender} scheduled a message "${msg}" to send in ${min} minutes to ${target}`, ephemeral: true });
-      console.log(`LOG: \t Interaction = ${interaction.options.getSubcommand()}`);
-      console.log(`LOG: \t ${sender.user.tag} scheduled a message "${msg}" to send in ${min} minutes to ${target.user.tag}`);
+      convertNum();
+      await interaction.reply({
+        content:
+          `You have scheduled to send 
+message:\t${msg}
+at:\t${hr}:${min}:${sec}\t${day}/${month}/${year}
+to:\t${target}`, ephemeral: true
+      });
+      console.log(`LOG: \t ${sender.user.tag} have scheduled to send 
+message:\t${msg}
+at:\t\t${hr}:${min}:${sec}\t${day}/${month}/${year}
+to:\t\t${target.user.tag}`);
     }
   },
 };
